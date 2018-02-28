@@ -1,1 +1,2 @@
-## a react-based resource buddy
+## 🛠 resource-gui
+a react-based resource buddy
