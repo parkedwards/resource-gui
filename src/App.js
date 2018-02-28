@@ -34,29 +34,47 @@ class App extends Component {
 
   onFieldChange = e => {
     e.preventDefault();
-    this.setState({
-      ...this.state,
-      search: e.target.value,
-    });
+    this.setState(
+      {
+        ...this.state,
+        search: e.target.value,
+      },
+      () => {
+        this.executeSearch();
+      },
+    );
   };
 
-  onSearchSubmit = () => {
-    console.log('inside of search submit');
+  executeSearch = () => {
     const { search } = this.state;
-    // const blah = idx.search(search);
     const { items } = sifter.search(search, {
-      fields: ['link_title', 'text'],
+      fields: ['link_title', 'link_text', 'text'],
       conjunction: 'and',
       limit: 500,
     });
 
-    // console.log(items.map(({ id }) => this.state.items[id]));
-    this.generateCards(items.map(({ id }) => this.state.items[id]));
+    this.setState({
+      ...this.state,
+      filtered: items.map(({ id }) => this.state.items[id]),
+    });
   };
 
-  generateCards = (items = this.state.items) => {
-    const result = items.map(o => (
-      <Card.Grid style={cardStyles}>{o.link_title}</Card.Grid>
+  generateCards = () => {
+    const { filtered, items, search } = this.state;
+    let data = [];
+
+    if (!search && !filtered.length) {
+      data = items;
+    }
+
+    if (filtered.length > 0) {
+      data = filtered;
+    }
+
+    const result = data.map(o => (
+      <a href={o.link_url}>
+        <Card.Grid style={cardStyles}>{o.link_title || o.text}</Card.Grid>
+      </a>
     ));
     return result;
   };
@@ -78,7 +96,7 @@ class App extends Component {
           size="large"
           value={this.state.search}
           onChange={this.onFieldChange}
-          onSearch={this.onSearchSubmit}
+          onSearch={this.executeSearch}
         />
         <Card>{this.generateCards()}</Card>
       </div>
