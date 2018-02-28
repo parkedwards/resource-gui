@@ -5,3 +5,15 @@
   background: #ececec;
   padding: 30px;
 }
+
+.spinner-wrap {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#main-spinner {
+  transform: scale(1.5);
+}

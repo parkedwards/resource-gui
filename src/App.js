@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Spin, Card, Row, Col, Input } from 'antd';
-import lunr from 'lunr';
+import Sifter from 'sifter';
+
 import './App.css';
 
 import executeFetch from './helpers';
 
 const { Search } = Input;
-let idx;
+let sifter;
 
 class App extends Component {
   state = {
@@ -25,14 +26,7 @@ class App extends Component {
       },
       () => {
         const { items } = this.state;
-        idx = lunr(function() {
-          this.field('link_title');
-          this.field('link_text');
-          this.field('text');
-          items.forEach(el => {
-            this.add(el);
-          });
-        });
+        sifter = new Sifter(items);
       },
     );
   };
@@ -46,22 +40,34 @@ class App extends Component {
   };
 
   onSearchSubmit = () => {
+    console.log('inside of search submit');
     const { search } = this.state;
-    const blah = idx.search(search);
-    // this.generateCards(blah.map(score => this.state.list[]))
+    // const blah = idx.search(search);
+    const { items } = sifter.search(search, {
+      fields: ['link_title', 'text'],
+      conjunction: 'and',
+      limit: 500,
+    });
+
+    // console.log(items.map(({ id }) => this.state.items[id]));
+    // this.generateCards(items.map(({ id }) => this.state.items[id]));
+    this.generateCards([{ link_title: 'heyoooo' }]);
   };
 
-  generateCards = (items = this.state.items) =>
-    items.map(o => <Card.Grid style={cardStyles}>{o.link_title}</Card.Grid>);
+  generateCards = (items = this.state.items) => {
+    const result = items.map(o => <Card.Grid style={cardStyles}>{o.link_title}</Card.Grid>);
+    return result;
+  };
 
   render() {
     if (this.state.fetching) {
       return (
-        <div>
-          <Spin size="large" />
+        <div className="spinner-wrap">
+          <Spin size="large" id="main-spinner" />
         </div>
       );
     }
+
 
     return (
       <div className="App">
@@ -73,7 +79,6 @@ class App extends Component {
           onChange={this.onFieldChange}
           onSearch={this.onSearchSubmit}
         />
-        {/* <Button type="primary">heyo</Button> */}
         <Card>{this.generateCards()}</Card>
       </div>
     );
