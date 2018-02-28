@@ -34,7 +34,7 @@ function requestMsgs(ts = 'now') {
     method: 'GET',
     uri: 'https://slack.com/api/channels.history',
     qs: {
-      token: '',
+      token: process.env.REACT_APP_BOT_TOKEN,
       channel: 'C5ZSSSJEM',
       pretty: 1,
       count: 1000,

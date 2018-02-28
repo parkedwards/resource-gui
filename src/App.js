@@ -21,6 +21,7 @@ class App extends Component {
     const data = await executeFetch();
     this.setState(
       {
+        ...this.state,
         items: data,
         fetching: false,
       },
@@ -50,12 +51,13 @@ class App extends Component {
     });
 
     // console.log(items.map(({ id }) => this.state.items[id]));
-    // this.generateCards(items.map(({ id }) => this.state.items[id]));
-    this.generateCards([{ link_title: 'heyoooo' }]);
+    this.generateCards(items.map(({ id }) => this.state.items[id]));
   };
 
   generateCards = (items = this.state.items) => {
-    const result = items.map(o => <Card.Grid style={cardStyles}>{o.link_title}</Card.Grid>);
+    const result = items.map(o => (
+      <Card.Grid style={cardStyles}>{o.link_title}</Card.Grid>
+    ));
     return result;
   };
 
@@ -67,7 +69,6 @@ class App extends Component {
         </div>
       );
     }
-
 
     return (
       <div className="App">
