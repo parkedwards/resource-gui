@@ -10,6 +10,9 @@ const { Search } = Input;
 const { Meta } = Card;
 let sifter;
 
+const placeholderImg =
+  'https://cdn2.iconfinder.com/data/icons/smartphone-settings-1/24/_coding-512.png';
+
 class App extends Component {
   state = {
     items: [],
@@ -78,7 +81,7 @@ class App extends Component {
         <Card
           hoverable
           style={cardStyles}
-          cover={<img src={o.image_url || o.thumb_url} />}
+          cover={<img src={o.image_url || o.thumb_url || placeholderImg} />}
         >
           <Meta title={o.link_title} description={o.text} />
         </Card>

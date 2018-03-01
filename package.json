@@ -16,6 +16,7 @@
   },
   "now": {
     "type": "npm",
+    "alias": ["gb-resource-gui"],
     "dotenv": true,
     "env": {
       "NODE_ENV": "production"
