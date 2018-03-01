@@ -80,7 +80,7 @@ class App extends Component {
         {/* <Card.Grid style={cardStyles}>{o.link_title || o.text}</Card.Grid> */}
         <Card
           hoverable
-          style={cardStyles}
+          className="card-body"
           cover={<img src={o.image_url || o.thumb_url || placeholderImg} />}
         >
           <Meta title={o.link_title} description={o.text} />
@@ -117,12 +117,12 @@ class App extends Component {
 
 export default App;
 
-const cardStyles = {
-  width: '250px',
-  margin: '50px 5px',
-  wordWrap: 'break-word',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  cursor: 'pointer',
-};
+// const cardStyles = {
+//   width: '250px',
+//   margin: '50px 5px',
+//   wordWrap: 'break-word',
+//   display: 'flex',
+//   flexDirection: 'column',
+//   justifyContent: 'center',
+//   cursor: 'pointer',
+// };
