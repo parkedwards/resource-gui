@@ -91,7 +91,7 @@ class App extends Component {
     return (
       <div className="App">
         <Search
-          placeholder="input search text"
+          placeholder="ex: javascript, shopify, graphql, design"
           enterButton="Search"
           size="large"
           value={this.state.search}

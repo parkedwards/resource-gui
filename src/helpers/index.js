@@ -15,14 +15,12 @@ function sanitizeData(messages) {
         fallback: attachments[0].fallback,
         service_icon: attachments[0].service_icon,
         thumb_url: attachments[0].thumb_url,
+        image_url: attachments[0].image_url,
       });
     } else if (containsURL(text)) {
       const isMatch = text.match(/<(.*)>/);
       if (isMatch) {
         const url = isMatch.pop();
-        console.log('-------');
-        console.log(text);
-        console.log(url);
         arr.push({
           text,
           link_title: url,
@@ -31,6 +29,7 @@ function sanitizeData(messages) {
           fallback: '',
           service_icon: '',
           thumb_url: '',
+          image_url: '',
         });
       }
     }
