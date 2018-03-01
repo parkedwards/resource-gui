@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Spin, Card, Row, Col, Input } from 'antd';
+import { Spin, Card, Input } from 'antd';
 import Sifter from 'sifter';
 
 import './App.css';
@@ -76,7 +76,7 @@ class App extends Component {
     }
 
     const result = data.map(o => (
-      <a href={o.link_url} className="card-link">
+      <a href={o.link_url} className="card-link" key={o.link_url + o.text}>
         {/* <Card.Grid style={cardStyles}>{o.link_title || o.text}</Card.Grid> */}
         <Card
           hoverable

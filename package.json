@@ -9,6 +9,7 @@
     "react-scripts": "1.1.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
+    "serve": "^6.5.1",
     "sifter": "^0.5.3"
   },
   "engines": {
@@ -16,7 +17,9 @@
   },
   "now": {
     "type": "npm",
-    "alias": ["gb-resource-gui"],
+    "alias": [
+      "gb-resource-gui"
+    ],
     "dotenv": true,
     "env": {
       "NODE_ENV": "production"
@@ -24,6 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "now-start": "serve -s ./build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

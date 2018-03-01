@@ -9,7 +9,7 @@ function isNotSlackUpload(str) {
 }
 
 function sanitizeData(messages) {
-  return messages.reduce((arr, { text, attachments }) => {
+  return messages.reduce((arr, { text, attachments }) => {s
     if (attachments) {
       arr.push({
         text,
