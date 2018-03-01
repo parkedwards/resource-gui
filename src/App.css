@@ -17,3 +17,27 @@
 #main-spinner {
   transform: scale(1.5);
 }
+
+.card-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 24px 250px !important;
+}
+
+.ant-card-meta {
+  width: 100%
+}
+
+
+
+.ant-card-body {
+  height: 100%;
+}
+
+.ant-input-affix-wrapper {
+  width: 60%;
+  margin-bottom: 30px;
+}

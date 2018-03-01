@@ -7,6 +7,7 @@ import './App.css';
 import executeFetch from './helpers';
 
 const { Search } = Input;
+const { Meta } = Card;
 let sifter;
 
 class App extends Component {
@@ -72,8 +73,15 @@ class App extends Component {
     }
 
     const result = data.map(o => (
-      <a href={o.link_url}>
-        <Card.Grid style={cardStyles}>{o.link_title || o.text}</Card.Grid>
+      <a href={o.link_url} className="card-link">
+        {/* <Card.Grid style={cardStyles}>{o.link_title || o.text}</Card.Grid> */}
+        <Card
+          hoverable
+          style={cardStyles}
+          cover={<img src={o.image_url || o.thumb_url} />}
+        >
+          <Meta title={o.link_title} description={o.text} />
+        </Card>
       </a>
     ));
     return result;
@@ -98,7 +106,7 @@ class App extends Component {
           onChange={this.onFieldChange}
           onSearch={this.executeSearch}
         />
-        <Card>{this.generateCards()}</Card>
+        <div className="card-wrap">{this.generateCards()}</div>
       </div>
     );
   }
@@ -107,9 +115,8 @@ class App extends Component {
 export default App;
 
 const cardStyles = {
-  width: '22%',
-  height: '250px',
-  margin: '5px',
+  width: '250px',
+  margin: '50px 5px',
   wordWrap: 'break-word',
   display: 'flex',
   flexDirection: 'column',

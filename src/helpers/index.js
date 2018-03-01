@@ -4,6 +4,10 @@ function containsURL(str) {
   return new RegExp('([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?').test(str);
 }
 
+function isNotSlackUpload(str) {
+  return !str.includes('fragrantjewels.slack.com/files/');
+}
+
 function sanitizeData(messages) {
   return messages.reduce((arr, { text, attachments }) => {
     if (attachments) {
@@ -17,7 +21,7 @@ function sanitizeData(messages) {
         thumb_url: attachments[0].thumb_url,
         image_url: attachments[0].image_url,
       });
-    } else if (containsURL(text)) {
+    } else if (containsURL(text) && isNotSlackUpload(text)) {
       const isMatch = text.match(/<(.*)>/);
       if (isMatch) {
         const url = isMatch.pop();
