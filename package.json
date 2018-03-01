@@ -11,6 +11,16 @@
     "request-promise": "^4.2.2",
     "sifter": "^0.5.3"
   },
+  "engines": {
+    "node": "9.4.0"
+  },
+  "now": {
+    "type": "npm",
+    "dotenv": true,
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
