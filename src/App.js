@@ -77,13 +77,12 @@ class App extends Component {
 
     const result = data.map(o => (
       <a href={o.link_url} className="card-link" key={o.link_url + o.text}>
-        {/* <Card.Grid style={cardStyles}>{o.link_title || o.text}</Card.Grid> */}
         <Card
           hoverable
           className="card-body"
-          cover={<img src={o.image_url || o.thumb_url || placeholderImg} />}
+          cover={<img src={o.image_url || o.thumb_url || o.service_icon || placeholderImg} />}
         >
-          <Meta title={o.link_title} description={o.text} />
+          <Meta title={o.link_title} description={o.link_text || o.text} />
         </Card>
       </a>
     ));
