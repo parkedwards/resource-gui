@@ -80,7 +80,7 @@ class App extends Component {
         <Card
           hoverable
           className="card-body"
-          cover={<img src={o.image_url || o.thumb_url || o.service_icon || placeholderImg} />}
+          cover={<img alt="img" src={o.image_url || o.thumb_url || o.service_icon || placeholderImg} />}
         >
           <Meta title={o.link_title} description={o.link_text || o.text} />
         </Card>
