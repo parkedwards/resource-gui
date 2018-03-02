@@ -5,7 +5,12 @@ function containsURL(str) {
 }
 
 function isNotSlackUpload(str) {
-  return !str.includes('fragrantjewels.slack.com/files/');
+  const options = [
+    'set the channel purpose:',
+    'pinned a message to this channel.',
+    'fragrantjewels.slack.com/files/',
+  ];
+  return options.every(target => str.includes(target));
 }
 
 function sanitizeData(messages) {
