@@ -22,18 +22,24 @@ class App extends Component {
   };
 
   componentWillMount = async () => {
-    const data = await executeFetch();
-    this.setState(
-      {
-        ...this.state,
-        items: data,
-        fetching: false,
-      },
-      () => {
-        const { items } = this.state;
-        sifter = new Sifter(items);
-      },
-    );
+    let data = {};
+    try {
+      data = await executeFetch();
+    } catch (error) {}
+
+    if (Object.keys(data).length) {
+      this.setState(
+        {
+          ...this.state,
+          items: data,
+          fetching: false,
+        },
+        () => {
+          const { items } = this.state;
+          sifter = new Sifter(items);
+        },
+      );
+    }
   };
 
   onFieldChange = e => {
@@ -80,7 +86,12 @@ class App extends Component {
         <Card
           hoverable
           className="card-body"
-          cover={<img alt="img" src={o.image_url || o.thumb_url || o.service_icon || placeholderImg} />}
+          cover={
+            <img
+              alt="img"
+              src={o.image_url || o.thumb_url || o.service_icon || placeholderImg}
+            />
+          }
         >
           <Meta title={o.link_title} description={o.link_text || o.text} />
         </Card>
